@@ -10,6 +10,8 @@ class Deduction extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
     protected $fillable = [
         'employee_id',
         'amount',
@@ -31,6 +33,13 @@ class Deduction extends Model
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function transactions(): BelongsToMany
+    {
+        return $this->belongsToMany(Transaction::class, 'transaction_deductions')
+                    ->withPivot('amount_applied')
+                    ->withTimestamps();
     }
 
     public function getDeductionTypeOptions(): array

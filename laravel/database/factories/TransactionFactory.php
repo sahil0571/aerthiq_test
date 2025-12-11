@@ -19,7 +19,7 @@ class TransactionFactory extends Factory
             'category' => $this->faker->optional()->word,
             'reference' => $this->faker->optional()->bothify('REF###'),
             'notes' => $this->faker->optional()->sentence,
-            'financial_year' => $this->faker->optional()->randomElement(['FY2024', 'FY2023', 'FY2025']),
+            'financial_year' => $this->faker->optional()->randomElement(['2023-2024', '2024-2025', '2025-2026']),
         ];
     }
 }

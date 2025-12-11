@@ -10,6 +10,8 @@ class Employee extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
     protected $fillable = [
         'employee_code',
         'first_name',
@@ -21,6 +23,7 @@ class Employee extends Model
         'hire_date',
         'salary',
         'is_active',
+        'project_id',
     ];
 
     protected $casts = [
@@ -37,6 +40,11 @@ class Employee extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function deductions(): HasMany
+    {
+        return $this->hasMany(Deduction::class);
     }
 
     public function getTotalPaidAttribute()
